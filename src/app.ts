@@ -1,11 +1,11 @@
-import Koa, { Context, HttpError } from 'koa'
+import Koa, { HttpError } from 'koa'
 import bodyParser from 'koa-bodyparser'
 import json from 'koa-json'
-import slogger, {LogLevel} from 'node-slogger'
-const logger = slogger.init({
-  level: LogLevel.DEBUG
-})
+
+
 import router from './routers'
+import { logger } from './config'
+import { processError } from './utils/middle'
 
 const app = new Koa()
 app.use(json())
