@@ -1,12 +1,12 @@
-import Router  from 'koa-router'
+import Router  from 'koa-router';
 
-const home = new Router()
+const home = new Router();
 
 home.get('/', async ( ctx )=>{
-  const html = `
+    const html = `
     <h2>hello world</h2>
-  `
-  ctx.body = html
-})
+  `;
+    ctx.body = html;
+});
 
-export default home
+export default home;
