@@ -2667,7 +2667,12 @@ json5@^2.2.2, json5@^2.2.3:
   resolved "https://registry.npmmirror.com/json5/-/json5-2.2.3.tgz#78cd6f1a19bdc12b73db5ad0c61efd66c1e29283"
   integrity sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==
 
-kafkajs@^2.2.4:
+"kafkajs1@npm:kafkajs@^1.16.0", "kafkajs@npm:kafkajs@^1.16.0":
+  version "1.16.0"
+  resolved "https://registry.npmmirror.com/kafkajs/-/kafkajs-1.16.0.tgz#bfcc3ae2b69265ca8435b53a01ee9e8787b9fee5"
+  integrity sha512-+Rcfu2hyQ/jv5skqRY8xA7Ra+mmRkDAzCaLDYbkGtgsNKpzxPWiLbk8ub0dgr4EbWrN1Zb4BCXHUkD6+zYfdWg==
+
+"kafkajs2@npm:kafkajs":
   version "2.2.4"
   resolved "https://registry.npmmirror.com/kafkajs/-/kafkajs-2.2.4.tgz#59e6e16459d87fdf8b64be73970ed5aa42370a5b"
   integrity sha512-j/YeapB1vfPT2iOIUn/vxdyKEuhuY2PxMBvf5JWux6iSaukAccrMtXEY/Lb7OvavDhOWME589bpLrEdnVHjfjA==
@@ -2930,10 +2935,10 @@ node-releases@^2.0.12:
   resolved "https://registry.npmmirror.com/node-releases/-/node-releases-2.0.12.tgz#35627cc224a23bfb06fb3380f2b3afaaa7eb1039"
   integrity sha512-QzsYKWhXTWx8h1kIvqfnC++o0pEmpRQA/aenALsL2F4pqNVr7YzcdMlDij5WBnwftRbJCNJL/O7zdKaxKPHqgQ==
 
-node-slogger@3.0.0-0:
-  version "3.0.0-0"
-  resolved "https://registry.npmmirror.com/node-slogger/-/node-slogger-3.0.0-0.tgz#33f2a741c32c7276f1711c821af0ca002bfb25a0"
-  integrity sha512-rRN5Fo5+QbAu/ebGrM8nCiXh+ufHD6ls8qX1+rafDFIzhGMTPbz3AbtZPXBiWhIc2T8LqgVHSqiARh9OICz20w==
+node-slogger@2.4.0-0:
+  version "2.4.0-0"
+  resolved "https://registry.npmmirror.com/node-slogger/-/node-slogger-2.4.0-0.tgz#08035f6cfb9b2f09d1a852caacecf087edeae38b"
+  integrity sha512-AaVlx/aoVy3kh7dgARYbclqNw1Dnfr19sPscMtp4AiHGNQfNj8o+/isbuSSWE6HBPjHfD8bGFMOPksw72rSUdw==
 
 normalize-path@^3.0.0, normalize-path@~3.0.0:
   version "3.0.0"

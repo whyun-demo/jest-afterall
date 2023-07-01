@@ -1,7 +1,7 @@
 import Koa, { HttpError } from 'koa';
 import bodyParser from 'koa-bodyparser';
 import json from 'koa-json';
-import * as logMiddle from './utils/log.middle.ts'
+import * as logMiddle from './utils/log.middle';
 
 import router from './routers';
 import { logger } from './config';

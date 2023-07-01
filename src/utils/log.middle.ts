@@ -1,14 +1,15 @@
-import { Context, Next, Request, Response } from 'koa';
+import { Context, Next } from 'koa';
 import { kafka } from '../config';
-const producer = kafka.producer();
+export const producer = kafka.producer();
 let connectedPromise: Promise<void>;
 const queue: unknown[] = [];
+let timer: NodeJS.Timeout;
 export function init() {
     connectedPromise = producer.connect();
     loop();
 }
 async function loop() {
-    setTimeout(async () => {
+    timer = setTimeout(async () => {
         await connectedPromise;
         const toSend = queue.splice(0).map((item) => {
             return {value: JSON.stringify(item)};
@@ -39,4 +40,11 @@ export function logMiddle() {
         // await connectedPromise;
         queue.push(data);
     };
+}
+
+export async function destroy() {
+    if (timer) {
+        clearTimeout(timer);
+    }
+    await producer.disconnect().catch(() => 0);
 }
