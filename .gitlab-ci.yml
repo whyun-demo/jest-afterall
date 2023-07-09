@@ -1,9 +1,9 @@
+image: node:latest
 
 variables:
   CI: 1
   
 before_script:
-  - docker --version
   - git --version
   - node -v
   - npm -v
