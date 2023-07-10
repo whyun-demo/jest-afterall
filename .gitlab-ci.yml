@@ -2,6 +2,15 @@ image: node:latest
 
 variables:
   CI: 1
+
+# Caches
+.node_modules-cache: &node_modules-cache
+  key:
+    files:
+      - yarn.lock
+  paths:
+    - node_modules
+  policy: pull
   
 before_script:
   - git --version
@@ -23,11 +32,10 @@ job:prepare:
   stage: prepare
 
   script:
-    - npm i  --no-audit --no-fund --verbose
-  artifacts:
-    expire_in: 15min
-    paths:
-      - node_modules/
+    - yarn install --cache-folder .yarn
+  cache:
+    - <<: *node_modules-cache
+      policy: pull-push # We override the policy
   allow_failure: false
   <<: *when_to_run
 
@@ -38,6 +46,8 @@ job:build:eslint:
   script:
     - npm run eslint
   allow_failure: false
+  cache:
+    - <<: *node_modules-cache
   <<: *when_to_run
 
 # build: build
@@ -50,6 +60,8 @@ job:build:build:
       - dist/
   script:
     - npm run build
+  cache:
+    - <<: *node_modules-cache
   allow_failure: false
   <<: *when_to_run
 
