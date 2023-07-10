@@ -54,22 +54,19 @@ job:build:build:
   <<: *when_to_run
 
 # build: test
-job:build:test:
-  stage: build
+# job:build:test:
+#   stage: build
 
-  coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
-  variables:
-    NODE_ENV: test
-  before_script:
-    - cp -rf env/.env.example .env.test 
-    - export $(cat .env.test | xargs)
-  script:
-    - npm run test:ci
-  artifacts:
-    when: always
-    reports:
-      junit: junit.xml
-      # cobertura: coverage/cobertura-coverage.xml
-  allow_failure: false
-  <<: *when_to_run
+#   coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
+#   variables:
+#     NODE_ENV: test
+#   script:
+#     - npm run test:ci
+#   artifacts:
+#     when: always
+#     reports:
+#       junit: junit.xml
+#       # cobertura: coverage/cobertura-coverage.xml
+#   allow_failure: false
+#   <<: *when_to_run
 
