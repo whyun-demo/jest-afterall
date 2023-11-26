@@ -11,12 +11,12 @@ describe('home', () => {
         const res = await request.get('/');
         expect(res.statusCode).toBe(200);
     });
-    it.skip('get error', async() => {
+    it('get error', async() => {
         const res = await request.get('/not-exist');
-        expect(res.statusCode).toBe(200);
+        expect(res.statusCode).toBe(404);
     });
     it('get error async',async () => {
         const res = await request.get('/timeout-error');
-        expect(res.statusCode).toBe(200);
+        expect(res.statusCode).toBe(500);
     });
 });

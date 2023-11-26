@@ -9,8 +9,10 @@ home.get('/', async ( ctx )=>{
     ctx.body = html;
 });
 home.get('/timeout-error',async () => {
-    setTimeout(() => {
-        throw new Error('error in timeout');
-    }, 0);
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            reject(null);
+        }, 0);
+    });
 });
 export default home;
