@@ -7,7 +7,8 @@
     "build": "rm -rf dist && tsc -p tsconfig.json",
     "eslint": "eslint . --ext .ts",
     "dev": "ts-node-dev --transpile-only --respawn --project tsconfig.json src/server.ts",
-    "test": "jest"
+    "test": "jest",
+    "test:ci": "jest --coverage --ci --reporters=default --reporters=jest-junit"
   },
   "repository": {
     "type": "git",
