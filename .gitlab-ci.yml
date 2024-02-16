@@ -11,11 +11,24 @@ variables:
   paths:
     - node_modules
   policy: pull
+.yarn-cache: &yarn-cache
+  key:
+    files:
+      - package.json
+  paths:
+    - .yarn-cache
   
-before_script:
-  - git --version
-  - node -v
-  - npm -v
+.check_node_modules:
+  script: &check-node-modules
+    - |
+      set -v
+      echo "check cache..."
+      if [ -d node_modules ] ; then
+        echo "show 10 deps:" && (ls node_modules/ | head) && echo "cache exist"
+      else
+        yarn install
+      fi
+
 
 stages:
   - prepare
@@ -32,22 +45,12 @@ job:prepare:
   stage: prepare
 
   script:
-    - yarn install --cache-folder .yarn
+    - yarn install
+    - npm run eslint
   cache:
     - <<: *node_modules-cache
       policy: pull-push # We override the policy
   allow_failure: false
-  <<: *when_to_run
-
-# build: eslint
-job:build:eslint:
-  stage: build
-
-  script:
-    - npm run eslint
-  allow_failure: false
-  cache:
-    - <<: *node_modules-cache
   <<: *when_to_run
 
 # build: build
@@ -58,6 +61,8 @@ job:build:build:
     expire_in: 10min
     paths:
       - dist/
+  before_script:
+    - *check-node-modules
   script:
     - npm run build
   cache:
@@ -66,19 +71,24 @@ job:build:build:
   <<: *when_to_run
 
 # build: test
-# job:build:test:
-#   stage: build
+job:build:test:
+  stage: build
 
-#   coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
-#   variables:
-#     NODE_ENV: test
-#   script:
-#     - npm run test:ci
-#   artifacts:
-#     when: always
-#     reports:
-#       junit: junit.xml
-#       # cobertura: coverage/cobertura-coverage.xml
-#   allow_failure: false
-#   <<: *when_to_run
+  coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
+  variables:
+    NODE_ENV: test
+  before_script:
+    - *check-node-modules
+  script:
+    - npm run test:ci
+  artifacts:
+    when: always
+    reports:
+      junit: junit.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
+  allow_failure: false
+  <<: *when_to_run
+  dependencies: []
 

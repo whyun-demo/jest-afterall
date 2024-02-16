@@ -12,7 +12,7 @@ export function processError(err: Error, ctx: BaseContext) {
         ctx.status = 500;
         ctx.body = {
             code: 88888,
-            msg: err.message
+            msg: err?.message
         };
     }
     if (ctx.status >= 500) {
