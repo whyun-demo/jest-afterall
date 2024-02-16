@@ -88,6 +88,8 @@ job:build:test:
       coverage_report:
         coverage_format: cobertura
         path: coverage/cobertura-coverage.xml
+  cache:
+    - <<: *node_modules-cache
   allow_failure: false
   <<: *when_to_run
   dependencies: []
