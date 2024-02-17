@@ -11,12 +11,6 @@ variables:
   paths:
     - node_modules
   policy: pull
-.yarn-cache: &yarn-cache
-  key:
-    files:
-      - package.json
-  paths:
-    - .yarn-cache
   
 .check_node_modules:
   script: &check-node-modules
@@ -33,7 +27,7 @@ variables:
 stages:
   - prepare
   - build
-  - image
+  - deploy
 
 .when-to-run: &when_to_run
   rules:
@@ -88,9 +82,19 @@ job:build:test:
       coverage_report:
         coverage_format: cobertura
         path: coverage/cobertura-coverage.xml
+    paths:
+      - coverage/lcov-report
   cache:
     - <<: *node_modules-cache
   allow_failure: false
   <<: *when_to_run
   dependencies: []
+
+pages:
+  stage: deploy
+  script:
+    - mv coverage/lcov-report public
+  artifacts:
+    paths:
+      - public
 
